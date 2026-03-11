@@ -1,1 +1,1525 @@
-hello world
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arjun Constructions | Premium Civil Engineering – Tamil Nadu & Kerala</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --terracotta: #A8340F;
+    --terracotta-light: #C94F26;
+    --cream: #F7EED8;
+    --cream-dark: #EDE0C4;
+    --forest: #1B4332;
+    --forest-light: #2D6A4F;
+    --gold: #C9A03A;
+    --gold-light: #E5C255;
+    --charcoal: #1C1C1C;
+    --slate: #3A3A3A;
+    --white: #FDFAF4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--charcoal);
+    color: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* ─── CURSOR ─── */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9999;
+    transition: transform 0.15s ease;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9998;
+    transition: transform 0.3s ease, opacity 0.3s;
+    mix-blend-mode: difference;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 1000;
+    padding: 22px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    transition: all 0.5s ease;
+  }
+  nav.scrolled {
+    background: rgba(28,28,28,0.96);
+    backdrop-filter: blur(12px);
+    padding: 16px 60px;
+    border-bottom: 1px solid rgba(201,160,58,0.2);
+  }
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--cream);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  .logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 38px; list-style: none; }
+  .nav-links a {
+    color: rgba(247,238,216,0.75);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 1.5px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta {
+    background: var(--terracotta);
+    color: var(--white) !important;
+    padding: 10px 24px !important;
+    border-radius: 2px;
+    transition: background 0.3s !important;
+  }
+  .nav-cta:hover { background: var(--terracotta-light) !important; }
+  .nav-cta::after { display: none !important; }
+  .hamburger {
+    display: none;
+    flex-direction: column; gap: 5px;
+    cursor: pointer;
+  }
+  .hamburger span {
+    width: 26px; height: 2px;
+    background: var(--cream);
+    transition: all 0.3s;
+  }
+
+  /* ─── HERO ─── */
+  #hero {
+    height: 100vh; min-height: 700px;
+    position: relative;
+    display: flex; align-items: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(135deg, rgba(27,67,50,0.65) 0%, rgba(28,28,28,0.8) 50%, rgba(168,52,15,0.45) 100%),
+      url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1800&q=80') center/cover no-repeat;
+    transform: scale(1.05);
+    animation: heroZoom 18s ease-in-out infinite alternate;
+  }
+  @keyframes heroZoom {
+    from { transform: scale(1.05); }
+    to   { transform: scale(1.12); }
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, rgba(28,28,28,0.7) 0%, transparent 70%);
+  }
+  .kolam-bg {
+    position: absolute; right: -80px; bottom: -80px;
+    width: 600px; height: 600px;
+    opacity: 0.04;
+    background-image: radial-gradient(circle, var(--gold) 1px, transparent 1px);
+    background-size: 24px 24px;
+    border-radius: 50%;
+    animation: spin 80s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 1200px; margin: 0 auto;
+    padding: 0 60px;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    opacity: 0; animation: fadeUp 0.8s ease 0.3s forwards;
+  }
+  .hero-tag::before {
+    content: ''; width: 36px; height: 1px; background: var(--gold);
+  }
+  .hero-h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.2rem, 7vw, 6.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 10px;
+    opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
+  }
+  .hero-h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+    display: block;
+  }
+  .hero-sub {
+    font-size: 1.05rem; font-weight: 300;
+    color: rgba(247,238,216,0.75);
+    max-width: 480px;
+    line-height: 1.75;
+    margin-top: 20px; margin-bottom: 44px;
+    opacity: 0; animation: fadeUp 0.8s ease 0.7s forwards;
+  }
+  .hero-actions {
+    display: flex; gap: 18px; align-items: center;
+    opacity: 0; animation: fadeUp 0.8s ease 0.9s forwards;
+  }
+  .btn-primary {
+    background: var(--terracotta);
+    color: var(--white);
+    padding: 16px 38px;
+    font-size: 0.88rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    position: relative; overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.3s;
+    display: inline-block;
+  }
+  .btn-primary::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: var(--gold);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+    z-index: 0;
+  }
+  .btn-primary:hover::before { transform: translateX(0); }
+  .btn-primary span { position: relative; z-index: 1; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(201,160,58,0.3); }
+  .btn-outline {
+    color: var(--cream); font-size: 0.88rem;
+    font-weight: 500; letter-spacing: 0.06em;
+    text-decoration: none;
+    padding: 16px 0;
+    display: flex; align-items: center; gap: 10px;
+    transition: gap 0.3s, color 0.3s;
+  }
+  .btn-outline:hover { gap: 18px; color: var(--gold); }
+  .btn-outline svg { width: 20px; }
+  .hero-stats {
+    position: absolute; bottom: 50px; right: 60px;
+    display: flex; gap: 48px;
+    opacity: 0; animation: fadeUp 0.8s ease 1.1s forwards;
+  }
+  .stat-item { text-align: right; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem; font-weight: 600;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.75rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: rgba(247,238,216,0.6);
+    margin-top: 4px;
+  }
+  .scroll-line {
+    position: absolute; bottom: 0; left: 60px;
+    width: 1px; height: 80px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    opacity: 0; animation: fadeIn 1s ease 1.5s forwards;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 100px 0; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+  .section-tag {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 0.75rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 18px;
+  }
+  .section-tag::before { content: ''; width: 28px; height: 1px; background: var(--gold); }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 4.5vw, 4rem);
+    font-weight: 300; line-height: 1.1;
+    color: var(--cream);
+  }
+  .section-title em { font-style: italic; color: var(--gold-light); }
+
+  /* ─── ABOUT ─── */
+  #about { background: var(--charcoal); }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+  }
+  .about-img-wrap {
+    position: relative;
+  }
+  .about-img-main {
+    width: 100%; height: 560px;
+    object-fit: cover;
+    border-radius: 3px;
+    display: block;
+  }
+  .about-img-accent {
+    position: absolute;
+    bottom: -30px; right: -30px;
+    width: 200px; height: 200px;
+    object-fit: cover;
+    border: 4px solid var(--charcoal);
+    border-radius: 3px;
+  }
+  .about-badge {
+    position: absolute;
+    top: 30px; left: -30px;
+    background: var(--terracotta);
+    padding: 18px 22px;
+    text-align: center;
+    border-radius: 2px;
+  }
+  .about-badge-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; font-weight: 700;
+    color: var(--white); line-height: 1;
+  }
+  .about-badge-txt {
+    font-size: 0.7rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: rgba(253,250,244,0.85);
+    margin-top: 4px;
+  }
+  .about-text p {
+    color: rgba(247,238,216,0.72);
+    font-size: 1rem; line-height: 1.9;
+    margin-bottom: 18px;
+  }
+  .about-features {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 16px; margin-top: 36px;
+  }
+  .feature-item {
+    display: flex; align-items: flex-start; gap: 12px;
+  }
+  .feature-icon {
+    width: 38px; height: 38px; flex-shrink: 0;
+    background: rgba(201,160,58,0.12);
+    border: 1px solid rgba(201,160,58,0.3);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold); font-size: 1rem;
+  }
+  .feature-label {
+    font-size: 0.88rem; font-weight: 500;
+    color: var(--cream);
+    padding-top: 8px;
+    line-height: 1.4;
+  }
+
+  /* ─── SERVICES ─── */
+  #services {
+    background: linear-gradient(180deg, #161616 0%, #1e1e1e 100%);
+  }
+  .services-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 60px;
+  }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .service-card {
+    background: #242424;
+    padding: 44px 36px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: background 0.4s;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; bottom: 0; left: 0;
+    width: 100%; height: 3px;
+    background: var(--terracotta);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .service-card:hover { background: #2c2c2c; }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-card:hover .service-num { color: var(--gold); }
+  .service-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem; font-weight: 300;
+    color: rgba(247,238,216,0.08);
+    line-height: 1;
+    margin-bottom: 24px;
+    transition: color 0.4s;
+  }
+  .service-icon-wrap {
+    width: 52px; height: 52px;
+    background: rgba(168,52,15,0.15);
+    border: 1px solid rgba(168,52,15,0.4);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+    transition: background 0.4s, border-color 0.4s;
+  }
+  .service-card:hover .service-icon-wrap {
+    background: rgba(168,52,15,0.3);
+    border-color: var(--terracotta);
+  }
+  .service-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 14px;
+  }
+  .service-desc {
+    font-size: 0.88rem; line-height: 1.85;
+    color: rgba(247,238,216,0.6);
+  }
+  .service-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-top: 24px;
+    font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gold); text-decoration: none;
+    transition: gap 0.3s;
+  }
+  .service-link:hover { gap: 14px; }
+
+  /* ─── SHOWCASE ─── */
+  #showcase { background: var(--charcoal); }
+  .showcase-filter {
+    display: flex; gap: 6px; margin-bottom: 48px; flex-wrap: wrap;
+  }
+  .filter-btn {
+    padding: 8px 22px;
+    background: transparent;
+    border: 1px solid rgba(247,238,216,0.2);
+    color: rgba(247,238,216,0.6);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .filter-btn.active, .filter-btn:hover {
+    background: var(--terracotta);
+    border-color: var(--terracotta);
+    color: var(--white);
+  }
+  .showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto;
+    gap: 12px;
+  }
+  .proj {
+    overflow: hidden; border-radius: 3px;
+    position: relative; cursor: pointer;
+  }
+  .proj-1 { grid-column: span 7; }
+  .proj-2 { grid-column: span 5; }
+  .proj-3 { grid-column: span 4; }
+  .proj-4 { grid-column: span 4; }
+  .proj-5 { grid-column: span 4; }
+  .proj img {
+    width: 100%; height: 300px;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+    display: block;
+  }
+  .proj-1 img, .proj-2 img { height: 420px; }
+  .proj:hover img { transform: scale(1.07); }
+  .proj-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(28,28,28,0.92) 0%, transparent 55%);
+    opacity: 0;
+    transition: opacity 0.4s;
+    display: flex; flex-direction: column;
+    justify-content: flex-end;
+    padding: 28px 26px;
+  }
+  .proj:hover .proj-overlay { opacity: 1; }
+  .proj-loc {
+    font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 6px;
+  }
+  .proj-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 600;
+    color: var(--white);
+  }
+  .proj-area {
+    font-size: 0.8rem; color: rgba(247,238,216,0.65);
+    margin-top: 4px;
+  }
+
+  /* ─── PROCESS ─── */
+  #process {
+    background: var(--forest);
+    position: relative; overflow: hidden;
+  }
+  #process::before {
+    content: '';
+    position: absolute; top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,160,58,0.08) 0%, transparent 70%);
+  }
+  .process-grid {
+    display: grid; grid-template-columns: repeat(4,1fr);
+    gap: 2px; margin-top: 64px;
+    position: relative;
+  }
+  .process-grid::before {
+    content: '';
+    position: absolute; top: 40px; left: 10%;
+    width: 80%; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,160,58,0.35), transparent);
+    z-index: 0;
+  }
+  .process-step {
+    background: rgba(255,255,255,0.05);
+    padding: 44px 30px;
+    text-align: center;
+    position: relative; z-index: 1;
+    transition: background 0.4s;
+  }
+  .process-step:hover { background: rgba(255,255,255,0.09); }
+  .step-circle {
+    width: 80px; height: 80px;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 24px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 600;
+    color: var(--gold);
+    background: var(--forest);
+    position: relative;
+  }
+  .step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-weight: 600;
+    color: var(--cream); margin-bottom: 12px;
+  }
+  .step-desc {
+    font-size: 0.85rem; line-height: 1.8;
+    color: rgba(247,238,216,0.65);
+  }
+
+  /* ─── WHY US ─── */
+  #why {
+    background: #161616;
+  }
+  .why-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+  }
+  .why-img {
+    position: relative;
+  }
+  .why-img-main {
+    width: 100%; height: 580px;
+    object-fit: cover; border-radius: 3px;
+  }
+  .why-img-card {
+    position: absolute; bottom: -24px; right: -24px;
+    background: var(--gold);
+    padding: 28px 32px;
+    border-radius: 2px;
+    text-align: center;
+    min-width: 160px;
+  }
+  .why-img-card .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; font-weight: 700;
+    color: var(--charcoal); line-height: 1;
+  }
+  .why-img-card .lbl {
+    font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(28,28,28,0.8); margin-top: 4px;
+  }
+  .why-points { margin-top: 40px; }
+  .why-point {
+    display: flex; gap: 20px; align-items: flex-start;
+    padding: 22px 0;
+    border-bottom: 1px solid rgba(247,238,216,0.08);
+  }
+  .why-point:first-child { border-top: 1px solid rgba(247,238,216,0.08); }
+  .why-point-icon {
+    width: 44px; height: 44px; flex-shrink: 0;
+    background: var(--terracotta);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+  }
+  .why-point h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem; font-weight: 600;
+    color: var(--cream); margin-bottom: 5px;
+  }
+  .why-point p {
+    font-size: 0.85rem; line-height: 1.75;
+    color: rgba(247,238,216,0.6);
+  }
+
+  /* ─── TESTIMONIALS ─── */
+  #testimonials {
+    background: var(--charcoal);
+    overflow: hidden;
+  }
+  .testi-wrap {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 24px; margin-top: 60px;
+  }
+  .testi-card {
+    background: #222;
+    border: 1px solid rgba(247,238,216,0.07);
+    padding: 38px 32px;
+    border-radius: 3px;
+    position: relative;
+    transition: border-color 0.4s, transform 0.4s;
+  }
+  .testi-card:hover {
+    border-color: rgba(201,160,58,0.3);
+    transform: translateY(-6px);
+  }
+  .testi-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem; line-height: 0.8;
+    color: var(--gold); opacity: 0.35;
+    margin-bottom: 16px;
+  }
+  .testi-text {
+    font-size: 0.92rem; line-height: 1.85;
+    color: rgba(247,238,216,0.75);
+    font-style: italic;
+    margin-bottom: 28px;
+  }
+  .testi-stars { color: var(--gold); font-size: 0.9rem; margin-bottom: 18px; }
+  .testi-person { display: flex; align-items: center; gap: 14px; }
+  .testi-avatar {
+    width: 48px; height: 48px; border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(201,160,58,0.4);
+  }
+  .testi-name {
+    font-weight: 600; font-size: 0.9rem; color: var(--cream);
+  }
+  .testi-loc {
+    font-size: 0.78rem; color: rgba(247,238,216,0.5);
+    margin-top: 2px;
+  }
+
+  /* ─── CONTACT ─── */
+  #contact {
+    background: linear-gradient(135deg, var(--forest) 0%, #0f2b1e 100%);
+    position: relative; overflow: hidden;
+  }
+  #contact::after {
+    content: '';
+    position: absolute; bottom: -150px; right: -150px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,160,58,0.12);
+  }
+  #contact::before {
+    content: '';
+    position: absolute; top: -100px; left: -100px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,160,58,0.08);
+  }
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1.4fr;
+    gap: 80px; position: relative; z-index: 2;
+  }
+  .contact-info h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    font-weight: 300; line-height: 1.15;
+    color: var(--cream); margin-bottom: 20px;
+  }
+  .contact-info h2 em { font-style: italic; color: var(--gold-light); }
+  .contact-info p {
+    font-size: 0.92rem; line-height: 1.85;
+    color: rgba(247,238,216,0.7); margin-bottom: 40px;
+  }
+  .contact-items { display: flex; flex-direction: column; gap: 20px; }
+  .c-item {
+    display: flex; align-items: center; gap: 16px;
+    padding: 18px 22px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 3px;
+    border-left: 3px solid var(--gold);
+  }
+  .c-icon {
+    width: 40px; height: 40px; flex-shrink: 0;
+    background: rgba(201,160,58,0.15);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+  }
+  .c-label {
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 2px;
+  }
+  .c-val {
+    font-size: 0.92rem; color: var(--cream);
+  }
+  .contact-form {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+    padding: 48px 44px;
+    border-radius: 4px;
+    border: 1px solid rgba(247,238,216,0.08);
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .form-group { margin-bottom: 22px; }
+  .form-group label {
+    display: block;
+    font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(247,238,216,0.6); margin-bottom: 8px;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%; padding: 14px 18px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(247,238,216,0.15);
+    border-radius: 2px;
+    color: var(--cream);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    transition: border-color 0.3s, background 0.3s;
+    outline: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--gold);
+    background: rgba(255,255,255,0.1);
+  }
+  .form-group select option { background: #1B4332; }
+  .form-group textarea { resize: vertical; min-height: 110px; }
+  .form-submit {
+    width: 100%; padding: 18px;
+    background: var(--terracotta);
+    color: var(--white);
+    border: none; border-radius: 2px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .form-submit:hover {
+    background: var(--gold);
+    color: var(--charcoal);
+    transform: translateY(-2px);
+  }
+
+  /* ─── MARQUEE ─── */
+  .marquee-section {
+    background: var(--terracotta);
+    padding: 18px 0;
+    overflow: hidden;
+  }
+  .marquee-track {
+    display: flex; gap: 60px;
+    animation: marquee 25s linear infinite;
+    white-space: nowrap;
+  }
+  .marquee-item {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem; font-weight: 600;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(253,250,244,0.85);
+    display: flex; align-items: center; gap: 20px;
+  }
+  .marquee-item::before {
+    content: '◆'; font-size: 0.5rem;
+    color: rgba(253,250,244,0.5);
+  }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #0e0e0e;
+    padding: 70px 0 30px;
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px; margin-bottom: 60px;
+  }
+  .footer-brand p {
+    font-size: 0.88rem; line-height: 1.85;
+    color: rgba(247,238,216,0.55);
+    margin-top: 16px; max-width: 260px;
+  }
+  .footer-social {
+    display: flex; gap: 12px; margin-top: 24px;
+  }
+  .soc-btn {
+    width: 38px; height: 38px;
+    border: 1px solid rgba(247,238,216,0.18);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(247,238,216,0.6);
+    text-decoration: none; font-size: 0.9rem;
+    transition: all 0.3s;
+  }
+  .soc-btn:hover {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--charcoal);
+  }
+  .footer-col h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-weight: 600;
+    color: var(--cream); margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(247,238,216,0.1);
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 10px; }
+  .footer-col ul a {
+    font-size: 0.85rem;
+    color: rgba(247,238,216,0.55);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer-col ul a:hover { color: var(--gold); }
+  .footer-bottom {
+    border-top: 1px solid rgba(247,238,216,0.08);
+    padding-top: 28px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 14px;
+  }
+  .footer-bottom p {
+    font-size: 0.8rem;
+    color: rgba(247,238,216,0.4);
+  }
+
+  /* ─── FLOATING CTA ─── */
+  .float-cta {
+    position: fixed; bottom: 32px; right: 32px; z-index: 999;
+    background: var(--terracotta);
+    color: var(--white);
+    padding: 14px 26px;
+    border-radius: 2px;
+    font-size: 0.82rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    text-decoration: none;
+    box-shadow: 0 8px 32px rgba(168,52,15,0.45);
+    transition: transform 0.2s, box-shadow 0.3s;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .float-cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 48px rgba(168,52,15,0.55);
+    background: var(--gold);
+    color: var(--charcoal);
+  }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 1024px) {
+    .container { padding: 0 40px; }
+    nav { padding: 20px 40px; }
+    nav.scrolled { padding: 14px 40px; }
+    .about-grid, .why-grid, .contact-grid { grid-template-columns: 1fr; gap: 50px; }
+    .about-img-main, .why-img-main { height: 420px; }
+    .about-badge { left: 0; }
+    .services-grid { grid-template-columns: repeat(2,1fr); }
+    .process-grid { grid-template-columns: repeat(2,1fr); }
+    .process-grid::before { display: none; }
+    .testi-wrap { grid-template-columns: 1fr 1fr; }
+    .hero-stats { right: 40px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .proj-1 { grid-column: span 12; }
+    .proj-2 { grid-column: span 12; }
+    .proj-3, .proj-4, .proj-5 { grid-column: span 6; }
+    .proj-5 { grid-column: span 12; }
+  }
+  @media (max-width: 768px) {
+    .container { padding: 0 24px; }
+    nav { padding: 18px 24px; }
+    nav.scrolled { padding: 12px 24px; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    section { padding: 72px 0; }
+    .hero-content { padding: 0 24px; }
+    .hero-stats { display: none; }
+    .scroll-line { display: none; }
+    .services-grid { grid-template-columns: 1fr; gap: 2px; }
+    .process-grid { grid-template-columns: 1fr; }
+    .testi-wrap { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+    .about-img-accent { display: none; }
+    .about-badge { position: static; margin-bottom: 24px; display: inline-block; }
+    .why-img-card { right: 0; bottom: -16px; }
+    .contact-form { padding: 28px 22px; }
+    .showcase-grid { display: flex; flex-direction: column; }
+    .proj img { height: 260px !important; }
+    .services-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Floating CTA -->
+<a href="#contact" class="float-cta">
+  <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 7V5z"/></svg>
+  Free Consultation
+</a>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="logo">Arjun<span>.</span> Constructions</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#showcase">Projects</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact" class="nav-cta">Get Quote</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="kolam-bg"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Tamil Nadu &amp; Kerala's Finest</div>
+    <h1 class="hero-h1">
+      Building Dreams<br>
+      <em>Brick by Brick</em>
+    </h1>
+    <p class="hero-sub">
+      Premium civil engineering &amp; house construction rooted in the heritage and climate of South India. From traditional Kerala nalukettu to contemporary Tamil villas.
+    </p>
+    <div class="hero-actions">
+      <a href="#showcase" class="btn-primary"><span>View Our Work</span></a>
+      <a href="#contact" class="btn-outline">
+        Get a Free Quote
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">500+</div>
+      <div class="stat-label">Homes Built</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">18+</div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">12</div>
+      <div class="stat-label">Districts Served</div>
+    </div>
+  </div>
+  <div class="scroll-line"></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track" id="marqueeTrack">
+    <span class="marquee-item">Tamil Nadu</span>
+    <span class="marquee-item">Kerala</span>
+    <span class="marquee-item">Custom Home Design</span>
+    <span class="marquee-item">Vastu Compliant</span>
+    <span class="marquee-item">Premium Finish</span>
+    <span class="marquee-item">On-Time Delivery</span>
+    <span class="marquee-item">ISO Certified</span>
+    <span class="marquee-item">South Indian Architecture</span>
+    <span class="marquee-item">Tamil Nadu</span>
+    <span class="marquee-item">Kerala</span>
+    <span class="marquee-item">Custom Home Design</span>
+    <span class="marquee-item">Vastu Compliant</span>
+    <span class="marquee-item">Premium Finish</span>
+    <span class="marquee-item">On-Time Delivery</span>
+    <span class="marquee-item">ISO Certified</span>
+    <span class="marquee-item">South Indian Architecture</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-wrap">
+        <div class="about-badge">
+          <div class="about-badge-num">18+</div>
+          <div class="about-badge-txt">Years of<br>Excellence</div>
+        </div>
+        <img class="about-img-main"
+          src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80"
+          alt="Civil engineer at work" loading="lazy">
+        <img class="about-img-accent"
+          src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=400&q=80"
+          alt="Construction site" loading="lazy">
+      </div>
+      <div class="about-text">
+        <div class="section-tag">About Us</div>
+        <h2 class="section-title">Crafting <em>Spaces</em><br>That Last Generations</h2>
+        <p>At Arjun Constructions, we bring over 18 years of expertise in residential and commercial civil engineering across Tamil Nadu and Kerala. Our deep understanding of South Indian climate, soil conditions, and architectural heritage sets us apart.</p>
+        <p>Led by Er. Arjun Murugan, B.E. (Civil), we combine traditional Vastu principles with modern structural engineering to build homes that are safe, beautiful, and timeless.</p>
+        <div class="about-features">
+          <div class="feature-item">
+            <div class="feature-icon">🏗️</div>
+            <div class="feature-label">Structural Engineering</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">📐</div>
+            <div class="feature-label">Vastu Consultation</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🌿</div>
+            <div class="feature-label">Eco-Friendly Build</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🏛️</div>
+            <div class="feature-label">Heritage Design</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">📋</div>
+            <div class="feature-label">TNRERA Compliant</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">⏱️</div>
+            <div class="feature-label">On-Time Guarantee</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="services-header">
+      <div>
+        <div class="section-tag">What We Build</div>
+        <h2 class="section-title">Our <em>Services</em></h2>
+      </div>
+      <p style="max-width:320px; color:rgba(247,238,216,0.6); font-size:0.9rem; line-height:1.8;">
+        End-to-end civil construction solutions tailored for South Indian homes, budgets &amp; lifestyles.
+      </p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <div class="service-icon-wrap">🏠</div>
+        <h3 class="service-title">Residential House Construction</h3>
+        <p class="service-desc">Full turnkey construction of individual homes — from foundation to finishing. Ground floors, duplex, triplex in Tamil Nadu & Kerala style with modern amenities.</p>
+        <a href="#contact" class="service-link">Enquire Now →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <div class="service-icon-wrap">🛕</div>
+        <h3 class="service-title">Traditional Nalukettu & Tharavadu</h3>
+        <p class="service-desc">Authentic Kerala-style courtyard homes with traditional wood carvings, teak pillars, sloped Mangalore tile roofs — blending heritage with comfort.</p>
+        <a href="#contact" class="service-link">Enquire Now →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <div class="service-icon-wrap">🏢</div>
+        <h3 class="service-title">Apartment & Commercial</h3>
+        <p class="service-desc">Multi-storey residential complexes, shops, and office spaces built with certified materials and approved structural drawings for Tamil Nadu DTCP & CMDA norms.</p>
+        <a href="#contact" class="service-link">Enquire Now →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-num">04</div>
+        <div class="service-icon-wrap">🔨</div>
+        <h3 class="service-title">Renovation & Extension</h3>
+        <p class="service-desc">Transform your existing home — add floors, expand rooms, upgrade interiors. We handle all structural checks and local body approvals before work begins.</p>
+        <a href="#contact" class="service-link">Enquire Now →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-num">05</div>
+        <div class="service-icon-wrap">📏</div>
+        <h3 class="service-title">Architectural Design & Drawings</h3>
+        <p class="service-desc">Vastu-compliant floor plans, elevation drawings, 3D renderings &amp; structural drawings ready for local body submission in TN &amp; Kerala municipalities.</p>
+        <a href="#contact" class="service-link">Enquire Now →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-num">06</div>
+        <div class="service-icon-wrap">🌳</div>
+        <h3 class="service-title">Compound Wall & Landscaping</h3>
+        <p class="service-desc">RCC compound walls, gate pillars, driveway, garden landscaping, rainwater harvesting pits, and borewell works — complete site development.</p>
+        <a href="#contact" class="service-link">Enquire Now →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOWCASE -->
+<section id="showcase">
+  <div class="container">
+    <div class="section-tag">Our Portfolio</div>
+    <h2 class="section-title" style="margin-bottom:36px;">Featured <em>Projects</em></h2>
+    <div class="showcase-filter">
+      <button class="filter-btn active">All Projects</button>
+      <button class="filter-btn">Tamil Nadu</button>
+      <button class="filter-btn">Kerala</button>
+      <button class="filter-btn">Traditional</button>
+      <button class="filter-btn">Modern Villa</button>
+    </div>
+    <div class="showcase-grid">
+      <div class="proj proj-1">
+        <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=900&q=80" alt="Modern South Indian Villa">
+        <div class="proj-overlay">
+          <div class="proj-loc">📍 Coimbatore, Tamil Nadu</div>
+          <div class="proj-name">The Murugan Villa</div>
+          <div class="proj-area">3200 sq.ft · 4 BHK · ₹1.2 Cr</div>
+        </div>
+      </div>
+      <div class="proj proj-2">
+        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=700&q=80" alt="Kerala Traditional Home">
+        <div class="proj-overlay">
+          <div class="proj-loc">📍 Thrissur, Kerala</div>
+          <div class="proj-name">Heritage Nalukettu</div>
+          <div class="proj-area">2800 sq.ft · Traditional · ₹95 L</div>
+        </div>
+      </div>
+      <div class="proj proj-3">
+        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80" alt="Contemporary Home">
+        <div class="proj-overlay">
+          <div class="proj-loc">📍 Madurai, Tamil Nadu</div>
+          <div class="proj-name">Senthil Residence</div>
+          <div class="proj-area">2400 sq.ft · 3 BHK</div>
+        </div>
+      </div>
+      <div class="proj proj-4">
+        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80" alt="Kerala House">
+        <div class="proj-overlay">
+          <div class="proj-loc">📍 Kochi, Kerala</div>
+          <div class="proj-name">Coastal Dream Home</div>
+          <div class="proj-area">3600 sq.ft · Sea View</div>
+        </div>
+      </div>
+      <div class="proj proj-5">
+        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&q=80" alt="Modern Villa TN">
+        <div class="proj-overlay">
+          <div class="proj-loc">📍 Trichy, Tamil Nadu</div>
+          <div class="proj-name">Lakshmi Gardens</div>
+          <div class="proj-area">4200 sq.ft · Duplex · ₹1.8 Cr</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="container">
+    <div style="text-align:center; max-width:600px; margin:0 auto;">
+      <div class="section-tag" style="justify-content:center;">How It Works</div>
+      <h2 class="section-title">Our Building <em>Process</em></h2>
+      <p style="margin-top:18px; color:rgba(247,238,216,0.65); font-size:0.92rem; line-height:1.85;">
+        A transparent, step-by-step journey — from your first call to receiving your keys.
+      </p>
+    </div>
+    <div class="process-grid">
+      <div class="process-step">
+        <div class="step-circle">01</div>
+        <h3 class="step-title">Site Visit & Consultation</h3>
+        <p class="step-desc">Our engineer visits your plot, understands soil type, faces the sun direction, and discusses your vision, budget, and requirements in detail — free of charge.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-circle">02</div>
+        <h3 class="step-title">Design & Estimation</h3>
+        <p class="step-desc">Vastu-compliant floor plans, 3D elevations, and a detailed cost estimate are provided within 5 working days — completely transparent with no hidden charges.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-circle">03</div>
+        <h3 class="step-title">Approvals & Permits</h3>
+        <p class="step-desc">We handle DTCP / Panchayat / Municipality plan approvals, CMDA submissions, and structural engineer certifications on your behalf across TN & Kerala.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-circle">04</div>
+        <h3 class="step-title">Construction & Handover</h3>
+        <p class="step-desc">Stage-by-stage construction with weekly photo updates, quality checks at every milestone, and a final walk-through before we hand you your dream home.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="container">
+    <div class="why-grid">
+      <div class="why-img">
+        <img class="why-img-main"
+          src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=80"
+          alt="Quality construction" loading="lazy">
+        <div class="why-img-card">
+          <div class="num">98%</div>
+          <div class="lbl">Client<br>Satisfaction</div>
+        </div>
+      </div>
+      <div>
+        <div class="section-tag">Why Choose Us</div>
+        <h2 class="section-title">Built on <em>Trust</em><br>& Precision</h2>
+        <div class="why-points">
+          <div class="why-point">
+            <div class="why-point-icon">🏆</div>
+            <div>
+              <h4>Licensed Civil Engineer – B.E. (Civil)</h4>
+              <p>Every project is directly supervised by Er. Arjun Murugan, ensuring engineering decisions are made by qualified professionals, not sub-contractors alone.</p>
+            </div>
+          </div>
+          <div class="why-point">
+            <div class="why-point-icon">🧱</div>
+            <div>
+              <h4>ISI-Marked Materials Only</h4>
+              <p>We use only ISI-certified cement, TMT steel (Fe-500D), AAC blocks or quality red bricks — materials tested for South India's tropical climate and monsoon conditions.</p>
+            </div>
+          </div>
+          <div class="why-point">
+            <div class="why-point-icon">💰</div>
+            <div>
+              <h4>Transparent Pricing — No Surprises</h4>
+              <p>Detailed BOQ (Bill of Quantities) signed before work begins. Any scope changes are agreed in writing. You know every rupee spent on your home.</p>
+            </div>
+          </div>
+          <div class="why-point">
+            <div class="why-point-icon">📱</div>
+            <div>
+              <h4>Weekly Progress Updates</h4>
+              <p>Real-time WhatsApp/video updates at every construction stage. Track your home being built — even from abroad. NRI clients especially welcome.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="container">
+    <div style="text-align:center; max-width:540px; margin:0 auto 16px;">
+      <div class="section-tag" style="justify-content:center;">Client Stories</div>
+      <h2 class="section-title">What Our <em>Clients</em> Say</h2>
+    </div>
+    <div class="testi-wrap">
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">Arjun sir and his team built our dream home in Coimbatore exactly as we imagined. The 3D design was so accurate that when we stepped into our finished home, it felt like walking into the render. Truly professional.</p>
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-person">
+          <img class="testi-avatar" src="https://i.pravatar.cc/80?img=12" alt="Rajesh">
+          <div>
+            <div class="testi-name">Rajesh Krishnamurthy</div>
+            <div class="testi-loc">Coimbatore, Tamil Nadu</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">We wanted a traditional Nalukettu with modern kitchen and bathrooms. Arjun Constructions understood perfectly. The teak woodwork and sloped roof came out beautifully. Our relatives from the Gulf were amazed.</p>
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-person">
+          <img class="testi-avatar" src="https://i.pravatar.cc/80?img=44" alt="Suresh">
+          <div>
+            <div class="testi-name">Suresh Nair</div>
+            <div class="testi-loc">Thrissur, Kerala</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">As an NRI, I was worried about supervising construction from Dubai. Arjun sir sent weekly videos and photos. Every stage was approved by me before moving forward. Handed over on the exact agreed date!</p>
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-person">
+          <img class="testi-avatar" src="https://i.pravatar.cc/80?img=32" alt="Priya">
+          <div>
+            <div class="testi-name">Priya Sundar</div>
+            <div class="testi-loc">Dubai (Home in Madurai)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="section-tag">Get In Touch</div>
+        <h2>Let's Build Your<br><em>Dream Home</em></h2>
+        <p>Ready to start? Fill in the form or call us directly. We offer a free site visit and consultation for all new clients across Tamil Nadu and Kerala.</p>
+        <div class="contact-items">
+          <div class="c-item">
+            <div class="c-icon">📞</div>
+            <div>
+              <div class="c-label">Call / WhatsApp</div>
+              <div class="c-val">+91 98400 XXXXX</div>
+            </div>
+          </div>
+          <div class="c-item">
+            <div class="c-icon">✉️</div>
+            <div>
+              <div class="c-label">Email</div>
+              <div class="c-val">arjun@arjunconstructions.in</div>
+            </div>
+          </div>
+          <div class="c-item">
+            <div class="c-icon">📍</div>
+            <div>
+              <div class="c-label">Office</div>
+              <div class="c-val">Tiruchirappalli &amp; Thrissur</div>
+            </div>
+          </div>
+          <div class="c-item">
+            <div class="c-icon">🕐</div>
+            <div>
+              <div class="c-label">Working Hours</div>
+              <div class="c-val">Mon–Sat: 9 AM – 7 PM</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:600; color:var(--cream); margin-bottom:30px;">
+          Request Free Consultation
+        </h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your Name *</label>
+            <input type="text" placeholder="Eg: Ramesh Kumar">
+          </div>
+          <div class="form-group">
+            <label>Phone Number *</label>
+            <input type="tel" placeholder="+91 98XXX XXXXX">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>City / District *</label>
+            <input type="text" placeholder="Eg: Coimbatore">
+          </div>
+          <div class="form-group">
+            <label>State *</label>
+            <select>
+              <option value="">Select State</option>
+              <option>Tamil Nadu</option>
+              <option>Kerala</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Project Type *</label>
+          <select>
+            <option value="">Select Project</option>
+            <option>New House Construction</option>
+            <option>Traditional Nalukettu / Tharavadu</option>
+            <option>Apartment / Commercial</option>
+            <option>Renovation / Extension</option>
+            <option>Architectural Drawing Only</option>
+            <option>Compound Wall / Landscaping</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Plot Area (sq.ft)</label>
+            <input type="number" placeholder="Eg: 2400">
+          </div>
+          <div class="form-group">
+            <label>Estimated Budget</label>
+            <select>
+              <option value="">Select Budget</option>
+              <option>Below ₹30 Lakh</option>
+              <option>₹30L – ₹60L</option>
+              <option>₹60L – ₹1 Crore</option>
+              <option>Above ₹1 Crore</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Message / Requirements</label>
+          <textarea placeholder="Tell us about your vision — floors, rooms, special requirements, Vastu preferences..."></textarea>
+        </div>
+        <button class="form-submit">🏗️ &nbsp; Request Free Site Visit</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo">Arjun<span>.</span> Constructions</a>
+        <p>Building quality homes across Tamil Nadu and Kerala since 2006. Licensed civil engineers, transparent pricing, and a legacy of 500+ happy families.</p>
+        <div class="footer-social">
+          <a href="#" class="soc-btn" title="Facebook">f</a>
+          <a href="#" class="soc-btn" title="Instagram">in</a>
+          <a href="#" class="soc-btn" title="YouTube">▶</a>
+          <a href="#" class="soc-btn" title="WhatsApp">W</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#">House Construction</a></li>
+          <li><a href="#">Nalukettu Design</a></li>
+          <li><a href="#">Renovations</a></li>
+          <li><a href="#">Architecture</a></li>
+          <li><a href="#">Commercial</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Locations</h4>
+        <ul>
+          <li><a href="#">Coimbatore</a></li>
+          <li><a href="#">Trichy</a></li>
+          <li><a href="#">Madurai</a></li>
+          <li><a href="#">Chennai</a></li>
+          <li><a href="#">Thrissur</a></li>
+          <li><a href="#">Kochi</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#showcase">Our Projects</a></li>
+          <li><a href="#process">Our Process</a></li>
+          <li><a href="#testimonials">Reviews</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Arjun Constructions. All rights reserved. | TNRERA Reg. No: TN/01/XXXX</p>
+      <p>Designed with ❤️ for South India</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.transform = `translate(${mx - 6}px, ${my - 6}px)`;
+  });
+  function animRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.transform = `translate(${rx - 18}px, ${ry - 18}px)`;
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+  document.querySelectorAll('a,button,.proj,.service-card').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform += ' scale(1.8)';
+      ring.style.opacity = '0.5';
+    });
+    el.addEventListener('mouseleave', () => {
+      ring.style.opacity = '1';
+    });
+  });
+
+  // Navbar scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Showcase filter (visual only)
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  // Scroll-triggered fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.service-card, .testi-card, .process-step, .why-point, .proj').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(28px)';
+    el.style.transition = 'opacity 0.65s ease, transform 0.65s ease';
+    observer.observe(el);
+  });
+
+  // Counter animation
+  function animateCounter(el, target) {
+    let current = 0;
+    const step = target / 60;
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) { current = target; clearInterval(timer); }
+      el.textContent = Math.floor(current) + (el.dataset.suffix || '');
+    }, 25);
+  }
+  const counterObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const nums = e.target.querySelectorAll('.stat-num');
+        nums.forEach(n => {
+          const val = parseInt(n.textContent);
+          n.dataset.suffix = n.textContent.replace(/[0-9]/g, '');
+          animateCounter(n, val);
+        });
+        counterObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.hero-stats').forEach(el => counterObs.observe(el));
+</script>
+</body>
+</html>
